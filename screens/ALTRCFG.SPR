@@ -1,0 +1,39 @@
+*- [CONVERTER] Declare arraysEXTERNAL ARRAY laspecies
+
+EXTERNAL PROC ALTRCFG.SCX
+
+DO FORM "ALTRCFG.SCX" NAME _3QE11UD9B LINKED 
+
+*- [CONVERTER] Begin CLEANUP and other procedures from 2.x Form
+
+PROCEDURE pbutton
+   PARAMETER pcaction
+   *----------------------------------------------------------------------*
+PROCEDURE pfeefield1
+   PARAMETER pcaction
+
+   SHOW GET m.feefield1 DISABLE
+   SHOW GET m.usefield3 ENABLE
+   SHOW GET m.usefield4 ENABLE
+   SHOW GET lnbutton, 1 ENABLE
+   SHOW GET lnbutton, 2 ENABLE
+   SHOW GET lnbutton, 3 DISABLE
+
+   IF SEEK("AltrFees" + m.feefield1)
+      llnew = .F.
+      SCATTER MEMVAR
+   ELSE
+      llnew = .T.
+      lctemp = m.feefield1
+      SCATTER MEMVAR BLANK
+      m.feetype = "AltrFees"
+      m.usefield1 = .T.
+      m.usefield2 = .T.
+      m.feefield1 = lctemp
+   ENDIF
+   SHOW GETS
+
+   RETURN .T.
+
+
+*- [CONVERTER] End CLEANUP and other procedures from 2.x Form
